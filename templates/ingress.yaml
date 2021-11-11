@@ -3,7 +3,7 @@
 {{- $serviceName := include "docker-registry.fullname" . -}}
 {{- $servicePort := .Values.service.port -}}
 {{- $path := .Values.ingress.path -}}
-apiVersion: {{- if $apiVersion.Has "networking.k8s.io/v1" }} networking.k8s.io/v1 {{- else }} networking.k8s.io/v1beta1 {{- end }}
+apiVersion: {{- if $apiVersion.Has "networking.k8s.io/v1" }} networking.k8s.io/v1 {{- else if $apiVersion.Has "networking.k8s.io/v1beta1" }} networking.k8s.io/v1beta1 {{- else }} extensions/v1beta1 {{- end }}
 kind: Ingress
 metadata:
   name: {{ template "docker-registry.fullname" . }}
